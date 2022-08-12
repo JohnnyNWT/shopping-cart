@@ -1,4 +1,4 @@
-const sectionClass = document.getElementsByClassName('items')[0];
+const section = document.getElementsByClassName('items');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -15,20 +15,20 @@ const createCustomElement = (element, className, innerText) => {
 };
 
 const createProductItemElement = ({ sku, name, image }) => {
-  const section = document.createElement('section');
-  section.className = 'item';
-  section.appendChild(createCustomElement('span', 'item__sku', sku));
-  section.appendChild(createCustomElement('span', 'item__title', name));
-  section.appendChild(createProductImageElement(image));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
-  return section;
+  const sectionElement = document.createElement('section');
+  sectionElement.className = 'item';
+  sectionElement.appendChild(createCustomElement('span', 'item__sku', sku));
+  sectionElement.appendChild(createCustomElement('span', 'item__title', name));
+  sectionElement.appendChild(createProductImageElement(image));
+  sectionElement.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  return sectionElement;
 };
 
 const creatElementsHTML = async (product) => {
   const api = await fetchProducts(product);
-  return api.forEach((element) => {
+  return api.results.forEach((element) => {
     const { id, title, thumbnail } = element;
-    sectionClass.appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
+    section[0].appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
   });
 };
 
