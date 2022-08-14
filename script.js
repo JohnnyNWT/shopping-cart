@@ -17,8 +17,8 @@ const createCustomElement = (element, className, innerText) => {
 
 // const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-const cartItemClickListener = () => {
-  // coloque seu código aqui
+const cartItemClickListener = (event) => {
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
