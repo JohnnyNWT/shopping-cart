@@ -1,6 +1,7 @@
 const section = document.getElementsByClassName('items');
 const cartItems = document.querySelector('.cart__items');
 const savedItems = document.getElementsByClassName('cart__items')[0];
+const listCart = document.getElementsByClassName('cart__item');
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -20,6 +21,7 @@ const createCustomElement = (element, className, innerText) => {
 
 const cartItemClickListener = (event) => {
   event.target.remove();
+  saveCartItems(cartItems.innerHTML);
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -63,4 +65,7 @@ const creatElementsHTML = async (product) => {
 window.onload = () => {
   creatElementsHTML('computador');
   savedItems.innerHTML = getSavedCartItems();
+  for (i = 0; i < listCart.length; i += 1) {
+    listCart[i].addEventListener('click', cartItemClickListener);
+  }
 };
