@@ -22,10 +22,11 @@ const createCustomElement = (element, className, innerText) => {
 // const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = (event) => {
-  event.target.remove();
-  const arr = event.target.innerText.split(' ');
+  const arr = event.target.innerText.split('$');
+  console.log(arr);
   const valorRemove = Number(arr[arr.length - 1]);
   totalPrice.innerText = (Number(totalPrice.innerText) - valorRemove);
+  event.target.remove();
   saveCartItems(cartItems.innerHTML);
   localStorage.setItem('totalPrice', totalPrice.innerText);
 };
@@ -33,7 +34,7 @@ const cartItemClickListener = (event) => {
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: ${salePrice}`;
+  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
   return li;
 };
@@ -63,7 +64,9 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 emptyCart.addEventListener('click', () => {
   cartItems.innerHTML = '';
+  totalPrice.innerText = 0;
   saveCartItems(cartItems.innerHTML);
+  localStorage.setItem('totalPrice', totalPrice.innerText);
 });
 
 const creatElementsHTML = async (product) => {

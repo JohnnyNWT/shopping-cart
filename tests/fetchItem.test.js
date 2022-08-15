@@ -13,7 +13,7 @@ describe('2 - Teste a função fetchItem', () => {
   });
 
   it('2.3 - Verifica se a função ultiliza o ENDPOINT correto', async () => {
-    await fetchItem('MLB16157605');
+    await fetchItem('MLB1615760527');
     const ENDPOINT = 'https://api.mercadolibre.com/items/MLB1615760527';
     expect(fetch).toHaveBeenCalledWith(ENDPOINT);
   });
@@ -24,6 +24,6 @@ describe('2 - Teste a função fetchItem', () => {
   });
 
   it('2.5 - Testa se a função retorna um erro ao chamar sem argumento', () => {
-    expect(fetchItem()).rejects.toThow(new Error('You must provide an url'));
+    expect(fetchItem()).rejects.toThrow(new Error('You must provide an url'));
   });
 });
